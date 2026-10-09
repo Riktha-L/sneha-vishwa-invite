@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import coupleTraditional from './assets/couple-traditional.jpg'
 import coupleReception from './assets/couple-reception.jpg'
 import coupleParty from './assets/couple-party.jpg'
@@ -11,6 +11,8 @@ import './App.css'
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isFlipped, setIsFlipped] = useState(false)
+  const audioRef = useRef(null)
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
   // Target date: October 25, 2026 9:00 AM (Muhurtham Start)
   const targetDate = new Date('2026-10-25T09:00:00')
@@ -33,55 +35,69 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
-  // Audio Player State
-  const [isAudioPlaying, setIsAudioPlaying] = useState(true)
-  const [player, setPlayer] = useState(null)
-
-  // Initialize YouTube Player
+  // Initialize Audio Player from 0:05 on loop
   useEffect(() => {
-    // Check if script is already present
-    if (!window.YT) {
-      const tag = document.createElement('script')
-      tag.src = "https://www.youtube.com/iframe_api"
-      const firstScriptTag = document.getElementsByTagName('script')[0]
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+    const audio = audioRef.current
+    if (!audio) return
+
+    const handleLoadedMetadata = () => {
+      if (audio.currentTime < 5) {
+        audio.currentTime = 5
+      }
     }
 
-    // Define the global callback
-    window.onYouTubeIframeAPIReady = () => {
-      const newPlayer = new window.YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
-        videoId: '9nppzjWa14o', // The requested video ID
-        playerVars: {
-          'autoplay': 1,
-          'controls': 0,
-          'loop': 1,
-          'playlist': '9nppzjWa14o',
-          'playsinline': 1
-        },
-        events: {
-          'onReady': (event) => {
-            event.target.playVideo()
-            // Ensure strictly unmuted to start if possible, though browsers may block
-            event.target.unMute()
-            setPlayer(event.target)
-          }
-        }
+    const handleEnded = () => {
+      audio.currentTime = 5
+      audio.play().then(() => setIsAudioPlaying(true)).catch(() => {})
+    }
+
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
+    audio.addEventListener('ended', handleEnded)
+
+    // Attempt autoplay from 5 seconds
+    audio.currentTime = 5
+    audio.play()
+      .then(() => setIsAudioPlaying(true))
+      .catch(() => {
+        // Autoplay policy prevented playback until user interaction
+        setIsAudioPlaying(false)
       })
+
+    // Play on first user click/touch gesture anywhere on screen
+    const handleGesture = () => {
+      if (audio.paused) {
+        if (audio.currentTime < 5) audio.currentTime = 5
+        audio.play().then(() => setIsAudioPlaying(true)).catch(() => {})
+      }
+      window.removeEventListener('click', handleGesture)
+      window.removeEventListener('touchstart', handleGesture)
+    }
+
+    window.addEventListener('click', handleGesture)
+    window.addEventListener('touchstart', handleGesture)
+
+    return () => {
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      audio.removeEventListener('ended', handleEnded)
+      window.removeEventListener('click', handleGesture)
+      window.removeEventListener('touchstart', handleGesture)
     }
   }, [])
 
   const toggleAudio = () => {
-    if (player) {
-      if (isAudioPlaying) {
-        player.mute()
-        setIsAudioPlaying(false)
-      } else {
-        player.unMute()
-        player.playVideo()
-        setIsAudioPlaying(true)
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (isAudioPlaying) {
+      audio.pause()
+      setIsAudioPlaying(false)
+    } else {
+      if (audio.currentTime < 5) {
+        audio.currentTime = 5
       }
+      audio.play()
+        .then(() => setIsAudioPlaying(true))
+        .catch(err => console.log("Audio play error:", err))
     }
   }
 
@@ -107,6 +123,9 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* HTML5 Audio Player */}
+      <audio ref={audioRef} src="/music cut.mpeg" preload="auto" />
+
       {/* Background Elements */}
       <div className="bg-layers">
         <div className="bg-layer-left"></div>
@@ -116,9 +135,6 @@ function App() {
 
       {/* Floral Corner Decoration */}
       <img src={floralCornerImage} alt="Floral Decoration" className="floral-corner-top-left" />
-
-      {/* Hidden YouTube Player Placeholder */}
-      <div id="youtube-player" style={{ position: 'absolute', top: -9999, left: -9999 }}></div>
 
       {/* Navigation / Header */}
       <nav className="navbar">
