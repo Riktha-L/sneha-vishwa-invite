@@ -63,66 +63,62 @@ function App() {
     const audio = audioRef.current
     if (!audio) return
 
-    const handleLoadedMetadata = () => {
-      if (audio.currentTime < 5) {
-        audio.currentTime = 5
+    let isStartSet = false
+
+    const startPlaying = () => {
+      try {
+        if (!isStartSet) {
+          audio.currentTime = 5
+          isStartSet = true
+        }
+      } catch (e) {
+        console.log("Setting currentTime deferred:", e)
       }
+
+      audio.play()
+        .then(() => setIsAudioPlaying(true))
+        .catch(() => setIsAudioPlaying(false))
+    }
+
+    const handleCanPlay = () => {
+      startPlaying()
     }
 
     const handleEnded = () => {
-      audio.currentTime = 5
+      try {
+        audio.currentTime = 5
+      } catch (e) {}
       audio.play().then(() => setIsAudioPlaying(true)).catch(() => {})
     }
 
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
+    audio.addEventListener('canplay', handleCanPlay)
     audio.addEventListener('ended', handleEnded)
 
-    // Attempt autoplay from 5 seconds
-    audio.currentTime = 5
-    audio.play()
-      .then(() => setIsAudioPlaying(true))
-      .catch(() => {
-        // Autoplay policy prevented playback until user interaction
-        setIsAudioPlaying(false)
-      })
+    // Attempt immediate play
+    startPlaying()
 
-    // Play on first user click/touch gesture anywhere on screen
+    // Trigger play on any initial user gesture (click, tap, or scroll)
     const handleGesture = () => {
       if (audio.paused) {
-        if (audio.currentTime < 5) audio.currentTime = 5
-        audio.play().then(() => setIsAudioPlaying(true)).catch(() => {})
+        startPlaying()
       }
       window.removeEventListener('click', handleGesture)
       window.removeEventListener('touchstart', handleGesture)
+      window.removeEventListener('scroll', handleGesture)
     }
 
     window.addEventListener('click', handleGesture)
     window.addEventListener('touchstart', handleGesture)
+    window.addEventListener('scroll', handleGesture)
 
     return () => {
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      audio.removeEventListener('canplay', handleCanPlay)
       audio.removeEventListener('ended', handleEnded)
       window.removeEventListener('click', handleGesture)
       window.removeEventListener('touchstart', handleGesture)
+      window.removeEventListener('scroll', handleGesture)
     }
   }, [])
-
-  const toggleAudio = () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    if (isAudioPlaying) {
-      audio.pause()
-      setIsAudioPlaying(false)
-    } else {
-      if (audio.currentTime < 5) {
-        audio.currentTime = 5
-      }
-      audio.play()
-        .then(() => setIsAudioPlaying(true))
-        .catch(err => console.log("Audio play error:", err))
-    }
-  }
 
   const addToCalendar = (eventType = 'muhurtham') => {
     let title, startTime, endTime, details
@@ -147,7 +143,10 @@ function App() {
   return (
     <div className="app-container">
       {/* HTML5 Audio Player */}
-      <audio ref={audioRef} src="/music cut.mpeg" preload="auto" />
+      <audio ref={audioRef} loop preload="auto">
+        <source src="/music-cut.mp3" type="audio/mpeg" />
+        <source src="/music-cut.mpeg" type="audio/mpeg" />
+      </audio>
 
       {/* Background Elements */}
       <div className="bg-layers">
