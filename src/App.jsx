@@ -220,7 +220,7 @@ function App() {
 
         {/* Engagement / Wedding Text */}
         <div className="engagement-text-section">
-          <p className="engagement-label">Wedding Celebration</p>
+          <p className="engagement-label">You are cordially invited to the wedding & reception of</p>
           <h1 className="couple-names">
             Niranjan <span className="name-ampersand">&</span> Cynthia
           </h1>
