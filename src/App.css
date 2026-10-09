@@ -129,7 +129,7 @@ body {
 }
 
 .brand-text {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     letter-spacing: 0.2rem;
     text-transform: uppercase;
     color: var(--color-rose-light);
@@ -141,7 +141,7 @@ body {
     align-items: center;
     gap: 2rem;
     margin-left: auto;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 700;
@@ -160,11 +160,11 @@ body {
 .rsvp-button {
     background-color: var(--color-gold);
     color: var(--color-white);
-    padding: 0.5rem 1.5rem;
+    padding: 0.6rem 1.6rem;
     border-radius: 9999px;
     border: none;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     transition: background-color 0.3s ease;
@@ -201,7 +201,7 @@ body {
     color: var(--color-gold);
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
@@ -209,7 +209,7 @@ body {
 .blessings-names {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.125rem;
+    font-size: 1.4rem;
     line-height: 1.6;
 }
 
@@ -218,7 +218,7 @@ body {
 }
 
 .ampersand {
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin: 0.25rem 0;
 }
 
@@ -569,15 +569,15 @@ body {
 .engagement-label {
     color: var(--color-gold-bright);
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    font-size: 0.95rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
 .couple-names {
     font-family: var(--font-serif);
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--color-rose-dark);
     line-height: 1.2;
     margin: 0;
@@ -587,7 +587,7 @@ body {
 
 @media (min-width: 768px) {
     .couple-names {
-        font-size: 4rem;
+        font-size: 4.5rem;
     }
 }
 
@@ -605,7 +605,7 @@ body {
     gap: 1rem;
     margin-bottom: 1rem;
     width: 100%;
-    max-width: 400px;
+    max-width: 440px;
     animation: fadeIn 1s ease-out 0.6s backwards;
 }
 
@@ -618,38 +618,33 @@ body {
 .save-date-text {
     color: var(--color-gold-bright);
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    font-size: 0.95rem;
     font-weight: 700;
 }
 
 /* Countdown */
 .countdown-container {
     display: flex;
-    gap: 0.75rem;
-    /* Reduced gap for mobile */
+    gap: 1rem;
     text-align: center;
     animation: fadeIn 1s ease-out 0.8s backwards;
-    background-color: rgba(255, 255, 255, 0.5);
-    /* Subtle background */
+    background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(8px);
-    padding: 1rem;
-    border-radius: 16px;
+    padding: 1.2rem;
+    border-radius: 20px;
     width: fit-content;
-    /* Use fit-content to wrap closely around items */
     max-width: 95%;
-    /* Ensure it doesn't overflow screen */
     margin: 1rem auto 3rem auto;
     justify-content: center;
     flex-wrap: nowrap;
-    /* Force single line */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.06);
 }
 
 @media (min-width: 768px) {
     .countdown-container {
-        gap: 3rem;
-        padding: 1.5rem 3rem;
+        gap: 3.5rem;
+        padding: 1.75rem 3.5rem;
     }
 }
 
@@ -661,19 +656,20 @@ body {
 
 .timer-value {
     font-family: var(--font-serif);
-    font-size: 1.75rem;
+    font-size: 2.2rem;
     color: var(--color-gold);
     margin-bottom: 0.1rem;
+    font-weight: 700;
 }
 
 @media (min-width: 768px) {
     .timer-value {
-        font-size: 3rem;
+        font-size: 3.5rem;
     }
 }
 
 .timer-label {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: var(--color-stone-light);
@@ -733,17 +729,17 @@ body {
 /* Details Section (When & Where) */
 .events-section-title {
     font-family: var(--font-serif);
-    font-size: 1.75rem;
+    font-size: 2.25rem;
     color: var(--color-rose-dark);
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
     letter-spacing: 0.05em;
 }
 
 .events-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.75rem;
     width: 100%;
     margin-bottom: 2rem;
     animation: fadeIn 1s ease-out 0.9s backwards;
@@ -758,7 +754,7 @@ body {
 .event-card {
     background-color: var(--color-white);
     border-radius: 28px;
-    padding: 2rem;
+    padding: 2.25rem;
     box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
     border: 1px solid #f3ece5;
     display: flex;
@@ -794,11 +790,11 @@ body {
 
 .event-card-tag {
     display: inline-block;
-    padding: 0.3rem 0.85rem;
+    padding: 0.35rem 0.95rem;
     border-radius: 9999px;
     background-color: #faf3ea;
     color: var(--color-gold-dark);
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -806,33 +802,33 @@ body {
 
 .event-card-title {
     font-family: var(--font-serif);
-    font-size: 1.85rem;
+    font-size: 2.2rem;
     color: var(--color-stone);
     margin: 0 0 0.5rem 0;
     line-height: 1.2;
 }
 
 .event-card-date {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: var(--color-rose-dark);
     font-weight: 600;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.4rem 0;
 }
 
 .event-card-time {
-    font-size: 1.15rem;
+    font-size: 1.35rem;
     color: var(--color-gold-dark);
     font-weight: 700;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.2rem 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
 .event-card-venue {
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     color: var(--color-stone-light);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
     line-height: 1.5;
 }
 
@@ -881,7 +877,7 @@ body {
 
 .detail-label {
     color: var(--color-gold);
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     font-weight: 700;
@@ -891,14 +887,14 @@ body {
 
 .detail-title {
     font-family: var(--font-serif);
-    font-size: 2rem;
+    font-size: 2.3rem;
     color: var(--color-stone);
     margin: 0 0 0.5rem 0;
     line-height: 1.2;
 }
 
 .detail-text {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: var(--color-stone-light);
     line-height: 1.6;
     margin: 0.5rem 0;
@@ -907,7 +903,7 @@ body {
 .detail-highlight {
     color: var(--color-gold-dark);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     margin-top: 1rem;
     display: block;
     text-transform: uppercase;
@@ -918,7 +914,7 @@ body {
     font-family: var(--font-serif);
     font-style: italic;
     color: #9ca3af;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     margin-top: 0.5rem;
 }
 
@@ -938,7 +934,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-stone-light);
@@ -1113,7 +1109,7 @@ body {
     border: 1px solid #e5e0d8;
     background: transparent;
     color: var(--color-gold-dark);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1128,28 +1124,28 @@ body {
 
 .add-cal-btn {
     white-space: nowrap;
-    padding: 0.5rem 1rem;
-    font-size: 0.65rem;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.8rem;
 }
 
 /* Footer */
 .footer {
     text-align: center;
-    padding: 2rem 0;
+    padding: 2.5rem 0;
     margin-top: auto;
     width: 100%;
 }
 
 .footer-logo {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--color-gold-bright);
     margin-bottom: 0.5rem;
 }
 
 .footer-est {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--color-gold-bright);
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -1189,23 +1185,23 @@ body {
 
 /* Mini Calendar Widget */
 .mini-calendar-widget {
-    width: 200px;
+    width: 230px;
     background: #ffffff;
-    border-radius: 16px;
+    border-radius: 18px;
     border: 1px solid #efeae4;
-    padding: 0.75rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    padding: 0.85rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
 .mini-calendar-widget .calendar-header {
     font-family: var(--font-serif);
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-rose-dark);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.4rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.5rem;
     border-bottom: 1px dashed #e8dcc6;
 }
 
@@ -1213,26 +1209,26 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 4px;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 
 .mini-calendar-widget .day-name {
     font-weight: 700;
     color: var(--color-gold-dark);
-    font-size: 0.65rem;
-    padding-bottom: 2px;
+    font-size: 0.75rem;
+    padding-bottom: 4px;
 }
 
 .mini-calendar-widget .calendar-day {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 22px;
-    width: 22px;
+    height: 26px;
+    width: 26px;
     margin: 0 auto;
     border-radius: 50%;
     color: var(--color-stone);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 
 .mini-calendar-widget .calendar-day.highlight-day {
@@ -1244,5 +1240,5 @@ body {
 }
 
 .mini-calendar-widget .empty-day {
-    height: 22px;
+    height: 26px;
 }
