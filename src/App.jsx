@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import coupleImage from './assets/couple-portrait.jpg'
-import cartoonCoupleImage from './assets/cartoon-couple.jpg'
+import coupleTraditional from './assets/couple-traditional.jpg'
+import coupleReception from './assets/couple-reception.jpg'
+import coupleParty from './assets/couple-party.jpg'
 import mapPreview from './assets/map-preview.png'
 import floralCornerImage from './assets/floral-corner-white-bg.png'
 import flowerRing from './assets/flower-ring.png'
@@ -152,7 +153,7 @@ function App() {
             {/* Front Face */}
             <div className="flip-card-front">
               <img
-                src={coupleImage}
+                src={coupleTraditional}
                 alt="Niranjan and Cynthia"
                 className="couple-photo"
               />
@@ -220,6 +221,7 @@ function App() {
                 <span className="event-card-tag">Auspicious Ceremony</span>
                 <Sun size={20} color="#bfa05f" />
               </div>
+              <img src={coupleTraditional} alt="Niranjan & Cynthia Muhurtham" className="event-card-img" />
               <h2 className="event-card-title">Muhurtham</h2>
               <p className="event-card-date">Sunday, 25th October 2026</p>
               <div className="event-card-time">
@@ -245,6 +247,7 @@ function App() {
                 <span className="event-card-tag">Grand Evening</span>
                 <Sparkles size={20} color="#bfa05f" />
               </div>
+              <img src={coupleParty} alt="Niranjan & Cynthia Reception" className="event-card-img" />
               <h2 className="event-card-title">Reception</h2>
               <p className="event-card-date">Sunday, 25th October 2026</p>
               <div className="event-card-time">
@@ -333,10 +336,10 @@ function App() {
         </div>
 
 
-        {/* Cartoon Illustration Section */}
+        {/* Featured Photo Section */}
         <div className="illustration-section">
           <div className="illustration-wrapper">
-            <img src={cartoonCoupleImage} alt="Happy Couple Art" className="cartoon-img" />
+            <img src={coupleReception} alt="Niranjan & Cynthia" className="cartoon-img" />
             <img src={flowerRing} alt="" className="cartoon-frame" />
           </div>
           <p className="illustration-caption">Can't wait to celebrate with you!</p>
