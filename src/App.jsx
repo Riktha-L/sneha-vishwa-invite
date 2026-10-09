@@ -397,15 +397,6 @@ function App() {
           <div className="footer-logo">N & C</div>
         </footer>
 
-        {/* Audio Control Floating Button */}
-        <button
-          className="audio-control"
-          onClick={toggleAudio}
-          title={isAudioPlaying ? "Mute Music" : "Play Music"}
-        >
-          {isAudioPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
-        </button>
-
       </main>
 
       {/* Flying Beige Hearts at Footer */}
