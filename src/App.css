@@ -498,17 +498,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-bottom: 3rem;
     animation: fadeIn 1s ease-out 1.2s backwards;
     text-align: center;
+    position: relative;
 }
 
 .illustration-wrapper {
     width: 280px;
     height: 280px;
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -549,10 +550,75 @@ body {
 
 .illustration-caption {
     font-family: var(--font-serif);
-    font-size: 1.2rem;
-    color: var(--color-gold-dark);
+    font-size: 1.5rem;
+    color: var(--color-rose-dark);
     font-style: italic;
-    margin: 0;
+    margin: 1rem 0 0 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* Map Direction Button */
+.map-direction-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+    padding: 0.75rem 1.6rem;
+    background-color: var(--color-rose-dark);
+    color: var(--color-white);
+    border: none;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(139, 94, 94, 0.25);
+    transition: all 0.3s ease;
+}
+
+.map-direction-btn:hover {
+    background-color: var(--color-gold-dark);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(168, 139, 77, 0.35);
+}
+
+/* Flying Beige Hearts Container */
+.footer-hearts-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 45;
+    overflow: hidden;
+}
+
+.beige-heart {
+    position: absolute;
+    bottom: -30px;
+    font-size: 16px;
+    color: #d4b896;
+    opacity: 0;
+    animation: floatUpBeige 5s infinite ease-in-out;
+    filter: drop-shadow(0 2px 4px rgba(191, 160, 95, 0.3));
+}
+
+@keyframes floatUpBeige {
+    0% {
+        transform: translateY(0) scale(0.6) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.85;
+    }
+    80% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-105vh) scale(1.15) rotate(30deg);
+        opacity: 0;
+    }
 }
 
 .hero-image-container:hover .couple-photo {

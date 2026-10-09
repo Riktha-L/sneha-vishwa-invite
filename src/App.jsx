@@ -14,6 +14,29 @@ function App() {
   const audioRef = useRef(null)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
+  // Flying beige hearts state & observer
+  const [showBeigeHearts, setShowBeigeHearts] = useState(false)
+  const footerRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowBeigeHearts(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current)
+    }
+
+    return () => {
+      if (footerRef.current) observer.unobserve(footerRef.current)
+    }
+  }, [])
+
   // Target date: October 25, 2026 9:00 AM (Muhurtham Start)
   const targetDate = new Date('2026-10-25T09:00:00')
 
@@ -331,6 +354,16 @@ function App() {
                   <h2 className="detail-title">Palace House</h2>
                   <p className="detail-text">Injambakkam, Chennai - 600115</p>
 
+                  <a
+                    href="https://maps.app.goo.gl/6wwidqBGCGow2UCL6?g_st=ac"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="map-direction-btn"
+                  >
+                    <Navigation size={16} />
+                    Map Direction
+                  </a>
+
                   <div className="valet-parking">
                     <span className="valet-icon">P</span> Valet Parking Available
                   </div>
@@ -360,11 +393,11 @@ function App() {
         </div>
 
         {/* Footer */}
-        <footer className="footer">
+        <footer className="footer" ref={footerRef}>
           <div className="footer-logo">N & C</div>
         </footer>
 
-        {/* Audio Control (Replaces Theme Toggle) */}
+        {/* Audio Control Floating Button */}
         <button
           className="audio-control"
           onClick={toggleAudio}
@@ -374,6 +407,36 @@ function App() {
         </button>
 
       </main>
+
+      {/* Flying Beige Hearts at Footer */}
+      {showBeigeHearts && (
+        <div className="footer-hearts-container">
+          {[
+            { left: '6%', delay: '0s', size: '14px' },
+            { left: '16%', delay: '1.2s', size: '18px' },
+            { left: '26%', delay: '0.4s', size: '12px' },
+            { left: '36%', delay: '2.1s', size: '16px' },
+            { left: '46%', delay: '0.8s', size: '20px' },
+            { left: '56%', delay: '2.5s', size: '14px' },
+            { left: '66%', delay: '1.5s', size: '18px' },
+            { left: '76%', delay: '0.3s', size: '12px' },
+            { left: '86%', delay: '1.8s', size: '16px' },
+            { left: '94%', delay: '2.7s', size: '14px' },
+          ].map((h, i) => (
+            <span
+              key={i}
+              className="beige-heart"
+              style={{
+                left: h.left,
+                animationDelay: h.delay,
+                fontSize: h.size
+              }}
+            >
+              ❤
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* Decorative vertical line left */}
       <div className="vertical-line"></div>
