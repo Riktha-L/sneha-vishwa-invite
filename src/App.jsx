@@ -221,7 +221,6 @@ function App() {
                 <span className="event-card-tag">Auspicious Ceremony</span>
                 <Sun size={20} color="#bfa05f" />
               </div>
-              <img src={coupleTraditional} alt="Niranjan & Cynthia Muhurtham" className="event-card-img" />
               <h2 className="event-card-title">Muhurtham</h2>
               <p className="event-card-date">Sunday, 25th October 2026</p>
               <div className="event-card-time">
@@ -247,7 +246,6 @@ function App() {
                 <span className="event-card-tag">Grand Evening</span>
                 <Sparkles size={20} color="#bfa05f" />
               </div>
-              <img src={coupleParty} alt="Niranjan & Cynthia Reception" className="event-card-img" />
               <h2 className="event-card-title">Reception</h2>
               <p className="event-card-date">Sunday, 25th October 2026</p>
               <div className="event-card-time">
