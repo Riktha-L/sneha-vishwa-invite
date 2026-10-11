@@ -1516,4 +1516,353 @@ body {
         min-width: 48px;
     }
 }
+
+/* ========================================================
+   OPENING PAGE COVER (CLASSIC & PREMIUM)
+   ======================================================== */
+.opening-cover {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg);
+    overflow: hidden;
+    padding: 1.25rem;
+    transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.opening-cover.cover-fade-out {
+    opacity: 0;
+    transform: scale(1.03);
+    pointer-events: none;
+}
+
+/* Background layers identical to site palette */
+.opening-bg-layers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.opening-bg-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100%;
+    background-color: #fcf4ee;
+}
+
+.opening-bg-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    background-color: #f7ebe6;
+    opacity: 0.85;
+    mix-blend-mode: multiply;
+}
+
+.opening-bg-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, #ffffff, transparent 65%);
+    opacity: 0.5;
+}
+
+/* Corner florals */
+.opening-floral-tl {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 130px;
+    height: auto;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.opening-floral-br {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 130px;
+    height: auto;
+    opacity: 0.85;
+    transform: rotate(180deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Outer Card Frame */
+.opening-card-frame {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(191, 160, 95, 0.45);
+    border-radius: 20px;
+    padding: 2.75rem 2rem 2.25rem;
+    box-shadow: 0 15px 40px rgba(139, 94, 94, 0.12),
+                0 4px 16px rgba(191, 160, 95, 0.1),
+                inset 0 0 0 5px rgba(253, 246, 240, 0.85),
+                inset 0 0 0 6.5px rgba(191, 160, 95, 0.35);
+    text-align: center;
+}
+
+.opening-inner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Top Tagline & Badge */
+.opening-badge {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--color-gold);
+    border-top: 1px solid rgba(191, 160, 95, 0.4);
+    border-bottom: 1px solid rgba(191, 160, 95, 0.4);
+    padding: 0.35rem 1rem;
+    margin-bottom: 0.85rem;
+}
+
+.opening-sub-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-rose-dark);
+    margin: 0 0 1rem;
+    letter-spacing: 0.04em;
+}
+
+/* Couple Names */
+.opening-names-wrapper {
+    margin: 0.25rem 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.opening-couple-name {
+    font-family: var(--font-serif);
+    font-size: 2.65rem;
+    font-weight: 600;
+    line-height: 1.12;
+    color: #4a2828;
+    letter-spacing: 0.02em;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(191, 160, 95, 0.15);
+}
+
+.opening-ampersand-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    width: 100%;
+    margin: 0.1rem 0;
+}
+
+.opening-line {
+    width: 38px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(191, 160, 95, 0.6), transparent);
+}
+
+.opening-ampersand {
+    font-family: var(--font-cursive);
+    font-size: 2.2rem;
+    color: var(--color-gold);
+    line-height: 1;
+}
+
+/* Event Details Snippet */
+.opening-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.85rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(253, 246, 240, 0.65);
+    border-radius: 12px;
+    border: 1px dashed rgba(191, 160, 95, 0.35);
+    width: 100%;
+    max-width: 340px;
+}
+
+.opening-event-type {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #5c3838;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 0.1rem;
+}
+
+.opening-date-badge,
+.opening-venue-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-stone);
+    font-weight: 500;
+}
+
+.opening-icon {
+    color: var(--color-gold);
+    flex-shrink: 0;
+}
+
+/* Big Round Red-to-Maroon Button */
+.opening-btn-wrapper {
+    position: relative;
+    margin: 0.4rem 0 0.85rem;
+}
+
+.opening-wax-btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    /* Gradient between red and royal maroon */
+    background: radial-gradient(circle at 35% 30%, #a81c2c 0%, #820f1e 55%, #520610 100%);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    box-shadow: 0 10px 24px rgba(130, 15, 30, 0.38),
+                0 4px 10px rgba(82, 6, 16, 0.3),
+                0 0 0 3px rgba(245, 197, 66, 0.45),
+                0 0 0 6px rgba(168, 28, 44, 0.15);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    animation: waxPulse 2.8s infinite ease-in-out;
+}
+
+.opening-wax-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 14px 30px rgba(130, 15, 30, 0.48),
+                0 6px 14px rgba(82, 6, 16, 0.35),
+                0 0 0 4px rgba(245, 197, 66, 0.65),
+                0 0 0 8px rgba(168, 28, 44, 0.2);
+}
+
+.opening-wax-btn:active {
+    transform: scale(0.96);
+}
+
+@keyframes waxPulse {
+    0%, 100% {
+        box-shadow: 0 10px 24px rgba(130, 15, 30, 0.38),
+                    0 4px 10px rgba(82, 6, 16, 0.3),
+                    0 0 0 3px rgba(245, 197, 66, 0.45),
+                    0 0 0 6px rgba(168, 28, 44, 0.15);
+    }
+    50% {
+        box-shadow: 0 14px 32px rgba(130, 15, 30, 0.52),
+                    0 6px 14px rgba(82, 6, 16, 0.4),
+                    0 0 0 4.5px rgba(245, 197, 66, 0.75),
+                    0 0 0 9px rgba(168, 28, 44, 0.28);
+    }
+}
+
+.wax-btn-inner-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(245, 197, 66, 0.55);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+}
+
+.wax-btn-icon {
+    color: #ffd7a8;
+    fill: #ffd7a8;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.wax-btn-text {
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #fff4ea;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    line-height: 1.15;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.opening-tap-hint {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--color-stone-light);
+    letter-spacing: 0.08em;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+    .opening-card-frame {
+        padding: 2.2rem 1.25rem 1.85rem;
+        border-radius: 16px;
+    }
+
+    .opening-couple-name {
+        font-size: 2.15rem;
+    }
+
+    .opening-ampersand {
+        font-size: 1.85rem;
+    }
+
+    .opening-wax-btn {
+        width: 110px;
+        height: 110px;
+    }
+
+    .wax-btn-text {
+        font-size: 0.72rem;
+    }
+
+    .opening-details {
+        padding: 0.6rem 0.9rem;
+    }
+
+    .opening-date-badge,
+    .opening-venue-badge {
+        font-size: 0.8rem;
+    }
+}
+
 

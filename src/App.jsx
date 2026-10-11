@@ -7,6 +7,8 @@ import { MapPin, Compass, Calendar, Navigation, Moon, Heart, Clock } from 'lucid
 import './App.css'
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isCoverDismissed, setIsCoverDismissed] = useState(false)
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isFlipped, setIsFlipped] = useState(false)
   const audioRef = useRef(null)
@@ -55,50 +57,17 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
-  // Initialize Background Audio (Loop seamlessly)
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const removeInteractionListeners = () => {
-      window.removeEventListener('click', handleUserInteraction)
-      window.removeEventListener('touchstart', handleUserInteraction)
-      window.removeEventListener('touchend', handleUserInteraction)
-      document.removeEventListener('click', handleUserInteraction)
-      document.removeEventListener('touchstart', handleUserInteraction)
+  // Audio Play Handler triggered upon Tap to Open
+  const handleOpenInvite = () => {
+    setIsOpen(true)
+    if (audioRef.current) {
+      audioRef.current.play().catch(() => {})
     }
-
-    const tryPlay = () => {
-      const playPromise = audio.play()
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            removeInteractionListeners()
-          })
-          .catch(() => {
-            // Autoplay prevented until user interacts with the page
-          })
-      }
-    }
-
-    const handleUserInteraction = () => {
-      tryPlay()
-    }
-
-    // Attempt autoplay immediately
-    tryPlay()
-
-    // Trigger play on first user tap/click anywhere
-    window.addEventListener('click', handleUserInteraction)
-    window.addEventListener('touchstart', handleUserInteraction, { passive: true })
-    window.addEventListener('touchend', handleUserInteraction)
-    document.addEventListener('click', handleUserInteraction)
-    document.addEventListener('touchstart', handleUserInteraction, { passive: true })
-
-    return () => {
-      removeInteractionListeners()
-    }
-  }, [])
+    // Remove cover from DOM after fade-out transition
+    setTimeout(() => {
+      setIsCoverDismissed(true)
+    }, 900)
+  }
 
   const addToCalendar = (eventType = 'muhurtham') => {
     let title, startTime, endTime, details
@@ -133,6 +102,75 @@ function App() {
         <source src="/music-cut.mp3" type="audio/mpeg" />
         <source src="/music-cut.mpeg" type="audio/mpeg" />
       </audio>
+
+      {/* Opening Page Cover */}
+      {!isCoverDismissed && (
+        <div className={`opening-cover ${isOpen ? 'cover-fade-out' : ''}`}>
+          {/* Subtle background layers matching main page */}
+          <div className="opening-bg-layers">
+            <div className="opening-bg-left"></div>
+            <div className="opening-bg-bottom"></div>
+            <div className="opening-bg-top"></div>
+          </div>
+
+          {/* Decorative Corner Florals */}
+          <img src={floralCornerImage} alt="" className="opening-floral-tl" />
+          <img src={floralCornerImage} alt="" className="opening-floral-br" />
+
+          {/* Card Border Ornament */}
+          <div className="opening-card-frame">
+            <div className="opening-inner-content">
+              {/* Top auspicious monogram & tagline */}
+              <div className="opening-badge">Wedding Invitation</div>
+
+              <p className="opening-sub-tagline">
+                Together with their families
+              </p>
+
+              {/* Couple Names */}
+              <div className="opening-names-wrapper">
+                <h1 className="opening-couple-name">Niranjan</h1>
+                <div className="opening-ampersand-divider">
+                  <span className="opening-line"></span>
+                  <span className="opening-ampersand">&amp;</span>
+                  <span className="opening-line"></span>
+                </div>
+                <h1 className="opening-couple-name">Cynthia</h1>
+              </div>
+
+              {/* Event Details snippet */}
+              <div className="opening-details">
+                <p className="opening-event-type">Muhurtham &amp; Reception</p>
+                <div className="opening-date-badge">
+                  <Calendar size={14} className="opening-icon" />
+                  <span>Sunday, 25th October 2026</span>
+                </div>
+                <div className="opening-venue-badge">
+                  <MapPin size={14} className="opening-icon" />
+                  <span>Palace House, Chennai</span>
+                </div>
+              </div>
+
+              {/* Big Round Red-to-Maroon Button */}
+              <div className="opening-btn-wrapper">
+                <button
+                  type="button"
+                  className="opening-wax-btn"
+                  onClick={handleOpenInvite}
+                  aria-label="Tap to open invitation"
+                >
+                  <div className="wax-btn-inner-ring">
+                    <Heart size={20} className="wax-btn-icon" />
+                    <span className="wax-btn-text">Tap to Open</span>
+                  </div>
+                </button>
+              </div>
+
+              <p className="opening-tap-hint">Tap to enter &amp; play music</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Background Elements */}
       <div className="bg-layers">
