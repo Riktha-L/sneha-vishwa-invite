@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import coupleTraditional from './assets/couple-traditional.jpg'
-import coupleReception from './assets/couple-reception.jpg'
-import coupleParty from './assets/couple-party.jpg'
+import footerImage from './assets/footer.jpg'
 import mapPreview from './assets/map-preview.png'
 import floralCornerImage from './assets/floral-corner-white-bg.png'
-import flowerRing from './assets/flower-ring.png'
-import { MapPin, Compass, Calendar, Navigation, Moon, Heart, Volume2, VolumeX, Sun, Sparkles, Clock } from 'lucide-react'
+import { MapPin, Compass, Calendar, Navigation, Moon, Heart, Clock } from 'lucide-react'
 import './App.css'
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isFlipped, setIsFlipped] = useState(false)
   const audioRef = useRef(null)
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
   // Flying beige hearts state & observer
   const [showBeigeHearts, setShowBeigeHearts] = useState(false)
@@ -58,65 +55,78 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
-  // Initialize Audio Player from 0:05 on loop
+  // Initialize Background Audio (Loop starting at 0:05)
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
 
-    let isStartSet = false
-
-    const startPlaying = () => {
+    const setStartTime = () => {
       try {
-        if (!isStartSet) {
+        if (audio.currentTime < 5) {
           audio.currentTime = 5
-          isStartSet = true
         }
-      } catch (e) {
-        console.log("Setting currentTime deferred:", e)
+      } catch {
+        // Deferred until audio metadata is ready
       }
-
-      audio.play()
-        .then(() => setIsAudioPlaying(true))
-        .catch(() => setIsAudioPlaying(false))
     }
 
-    const handleCanPlay = () => {
-      startPlaying()
+    const removeInteractionListeners = () => {
+      window.removeEventListener('click', handleUserInteraction)
+      window.removeEventListener('touchstart', handleUserInteraction)
+      window.removeEventListener('touchend', handleUserInteraction)
+      document.removeEventListener('click', handleUserInteraction)
+      document.removeEventListener('touchstart', handleUserInteraction)
     }
 
+    const tryPlay = () => {
+      setStartTime()
+      const playPromise = audio.play()
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            removeInteractionListeners()
+          })
+          .catch(() => {
+            // Autoplay prevented until user interacts with the page
+          })
+      }
+    }
+
+    const handleUserInteraction = () => {
+      tryPlay()
+    }
+
+    const handleLoadedMetadata = () => {
+      setStartTime()
+    }
+
+    // Seamless loop from 0:05 when track ends
     const handleEnded = () => {
       try {
         audio.currentTime = 5
-      } catch (e) {}
-      audio.play().then(() => setIsAudioPlaying(true)).catch(() => {})
+      } catch {
+        // Fallback
+      }
+      audio.play().catch(() => {})
     }
 
-    audio.addEventListener('canplay', handleCanPlay)
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
     audio.addEventListener('ended', handleEnded)
 
-    // Attempt immediate play
-    startPlaying()
+    // Attempt autoplay immediately
+    tryPlay()
 
-    // Trigger play on any initial user gesture (click, tap, or scroll)
-    const handleGesture = () => {
-      if (audio.paused) {
-        startPlaying()
-      }
-      window.removeEventListener('click', handleGesture)
-      window.removeEventListener('touchstart', handleGesture)
-      window.removeEventListener('scroll', handleGesture)
-    }
-
-    window.addEventListener('click', handleGesture)
-    window.addEventListener('touchstart', handleGesture)
-    window.addEventListener('scroll', handleGesture)
+    // Trigger play on first user tap/click anywhere
+    window.addEventListener('click', handleUserInteraction)
+    window.addEventListener('touchstart', handleUserInteraction, { passive: true })
+    window.addEventListener('touchend', handleUserInteraction)
+    document.addEventListener('click', handleUserInteraction)
+    document.addEventListener('touchstart', handleUserInteraction, { passive: true })
 
     return () => {
-      audio.removeEventListener('canplay', handleCanPlay)
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
       audio.removeEventListener('ended', handleEnded)
-      window.removeEventListener('click', handleGesture)
-      window.removeEventListener('touchstart', handleGesture)
-      window.removeEventListener('scroll', handleGesture)
+      removeInteractionListeners()
     }
   }, [])
 
@@ -143,7 +153,12 @@ function App() {
   return (
     <div className="app-container">
       {/* HTML5 Audio Player */}
-      <audio ref={audioRef} loop preload="auto">
+      <audio
+        ref={audioRef}
+        preload="auto"
+        playsInline
+        src="/music-cut.mp3"
+      >
         <source src="/music-cut.mp3" type="audio/mpeg" />
         <source src="/music-cut.mpeg" type="audio/mpeg" />
       </audio>
@@ -257,7 +272,6 @@ function App() {
             <div>
               <div className="event-header">
                 <span className="event-card-tag">Auspicious Ceremony</span>
-                <Sun size={20} color="#bfa05f" />
               </div>
               <h2 className="event-card-title">Muhurtham</h2>
               <p className="event-card-date">Sunday, 25th October 2026</p>
@@ -282,7 +296,6 @@ function App() {
             <div>
               <div className="event-header">
                 <span className="event-card-tag">Grand Evening</span>
-                <Sparkles size={20} color="#bfa05f" />
               </div>
               <h2 className="event-card-title">Reception</h2>
               <p className="event-card-date">Sunday, 25th October 2026</p>
@@ -382,18 +395,24 @@ function App() {
         </div>
 
 
-        {/* Featured Photo Section */}
-        <div className="illustration-section">
-          <div className="illustration-wrapper">
-            <img src={coupleReception} alt="Niranjan & Cynthia" className="cartoon-img" />
-            <img src={flowerRing} alt="" className="cartoon-frame" />
-          </div>
-          <p className="illustration-caption">Can't wait to celebrate with you!</p>
-        </div>
-
-        {/* Footer */}
+        {/* Footer Section */}
         <footer className="footer" ref={footerRef}>
-          <div className="footer-logo">N & C</div>
+          <div className="footer-image-card">
+            <img
+              src={footerImage}
+              alt="Niranjan, Cynthia, Luna & Friday"
+              className="footer-family-img"
+            />
+          </div>
+
+          <div className="footer-text-content">
+            <p className="footer-caption">Can't wait to celebrate with you!</p>
+            <h2 className="footer-couple-name">Niranjan & Cynthia</h2>
+            <p className="footer-pets">
+              with <span className="pets-names-cursive">Luna & Friday</span> 🐾
+            </p>
+            <div className="footer-logo">N & C</div>
+          </div>
         </footer>
 
       </main>
