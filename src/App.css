@@ -1404,6 +1404,120 @@ body {
     font-weight: 300;
 }
 
+/* LoveNote Credits & Contact Info */
+.lovenote-credits {
+    width: 100%;
+    max-width: 480px;
+    margin-top: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.lovenote-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 220px;
+    margin-bottom: 1.15rem;
+}
+
+.lovenote-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(191, 160, 95, 0.45), transparent);
+}
+
+.lovenote-sparkle {
+    color: var(--color-gold);
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.lovenote-crafted-by {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-stone-light);
+    margin: 0 0 0.25rem 0;
+    font-weight: 600;
+}
+
+.lovenote-brand-name {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #5a2c2c;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.2rem 0;
+}
+
+.lovenote-tagline {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-stone-light);
+    letter-spacing: 0.05em;
+    margin: 0 0 1.25rem 0;
+    font-weight: 500;
+}
+
+.lovenote-contact-pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    width: 100%;
+}
+
+.lovenote-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(191, 160, 95, 0.35);
+    border-radius: 9999px;
+    color: var(--color-stone);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(139, 94, 94, 0.06);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lovenote-pill:hover {
+    background: #ffffff;
+    border-color: var(--color-gold);
+    color: var(--color-rose-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(191, 160, 95, 0.22);
+}
+
+.lovenote-pill:active {
+    transform: translateY(0);
+}
+
+.lovenote-icon {
+    color: var(--color-gold-dark);
+    flex-shrink: 0;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.lovenote-pill:hover .lovenote-icon {
+    transform: scale(1.15);
+    color: var(--color-rose-dark);
+}
+
 /* Mini Calendar Widget */
 .mini-calendar-widget {
     width: 100%;
@@ -1510,6 +1624,19 @@ body {
 
     .footer {
         padding: 2rem 0.5rem 3rem;
+    }
+
+    .lovenote-credits {
+        margin-top: 1.85rem;
+    }
+
+    .lovenote-contact-pills {
+        gap: 0.5rem;
+    }
+
+    .lovenote-pill {
+        padding: 0.42rem 0.8rem;
+        font-size: 0.78rem;
     }
 }
 

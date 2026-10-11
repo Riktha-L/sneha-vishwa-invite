@@ -3,7 +3,7 @@ import coupleTraditional from './assets/couple-traditional.jpg'
 import footerImage from './assets/footer.jpg'
 import mapPreview from './assets/map-preview.png'
 import floralCornerImage from './assets/floral-corner-white-bg.png'
-import { MapPin, Compass, Calendar, Navigation, Moon, Heart, Clock } from 'lucide-react'
+import { MapPin, Compass, Calendar, Navigation, Moon, Heart, Clock, Phone, Globe, Instagram } from 'lucide-react'
 import './App.css'
 
 function App() {
@@ -421,6 +421,51 @@ function App() {
               with <span className="pets-names-cursive">Luna & Friday</span> 🐾
             </p>
             <div className="footer-logo">N & C</div>
+
+            {/* LoveNote Credits & Contact Info */}
+            <div className="lovenote-credits">
+              <div className="lovenote-divider">
+                <span className="lovenote-divider-line"></span>
+                <span className="lovenote-sparkle">✦</span>
+                <span className="lovenote-divider-line"></span>
+              </div>
+              <p className="lovenote-crafted-by">Crafted with love by</p>
+              <h3 className="lovenote-brand-name">LoveNote</h3>
+              <p className="lovenote-tagline">Digital Wedding Invitations</p>
+
+              <div className="lovenote-contact-pills">
+                <a
+                  href="tel:+918610239949"
+                  className="lovenote-pill"
+                  aria-label="Call LoveNote: 8610239949"
+                >
+                  <Phone size={14} className="lovenote-icon" />
+                  <span>8610239949</span>
+                </a>
+
+                <a
+                  href="https://thelovenote.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lovenote-pill"
+                  aria-label="LoveNote Website: thelovenote.in"
+                >
+                  <Globe size={14} className="lovenote-icon" />
+                  <span>thelovenote.in</span>
+                </a>
+
+                <a
+                  href="https://www.instagram.com/lovenote_invites/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lovenote-pill"
+                  aria-label="LoveNote Instagram: lovenote_invites"
+                >
+                  <Instagram size={14} className="lovenote-icon" />
+                  <span>lovenote_invites</span>
+                </a>
+              </div>
+            </div>
           </div>
         </footer>
 
