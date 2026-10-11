@@ -650,7 +650,7 @@ body {
 }
 
 .engagement-label {
-    color: var(--color-gold-bright);
+    color: #966b2e;
     text-transform: uppercase;
     letter-spacing: clamp(0.12em, 1.5vw, 0.25em);
     font-size: clamp(0.8rem, 2.5vw, 0.95rem);
@@ -658,16 +658,19 @@ body {
     margin-bottom: 0.85rem;
     padding: 0 0.5rem;
     line-height: 1.4;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .couple-names {
     font-family: var(--font-serif);
     font-size: clamp(2.1rem, 7vw, 4.5rem);
-    color: var(--color-rose-dark);
+    color: #4a2424;
+    font-weight: 700;
     line-height: 1.15;
     margin: 0;
     padding: 0 0.5rem;
     word-break: break-word;
+    text-shadow: 0 1px 3px rgba(191, 160, 95, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -677,10 +680,12 @@ body {
 }
 
 .name-ampersand {
-    color: var(--color-gold);
-    font-size: 0.7em;
+    font-family: var(--font-cursive);
+    color: #a88238;
+    font-size: 0.85em;
     vertical-align: middle;
     padding: 0 0.4rem;
+    font-weight: 400;
 }
 
 /* Save The Date Divider */
@@ -1347,7 +1352,7 @@ body {
     font-family: var(--font-serif);
     font-size: clamp(1.85rem, 5.5vw, 2.25rem);
     font-weight: 700;
-    color: var(--color-stone);
+    color: #4a2424;
     margin: 0.35rem 0 0;
     letter-spacing: 0.04em;
     line-height: 1.2;
@@ -1357,7 +1362,7 @@ body {
     font-family: var(--font-sans);
     font-size: clamp(0.95rem, 3vw, 1.15rem);
     font-weight: 500;
-    color: var(--color-stone-light);
+    color: #6b635b;
     letter-spacing: 0.05em;
     margin: 0.25rem 0 0.85rem;
     display: inline-flex;
@@ -1371,7 +1376,7 @@ body {
     font-family: var(--font-cursive);
     font-size: clamp(1.85rem, 6.5vw, 2.35rem);
     font-weight: 400;
-    color: var(--color-gold-dark);
+    color: #966b2e;
     letter-spacing: 0.02em;
     text-transform: none;
     line-height: 1.1;
@@ -1381,11 +1386,22 @@ body {
 
 .footer-logo {
     font-family: var(--font-serif);
-    font-size: clamp(1.5rem, 4.5vw, 1.75rem);
+    font-size: clamp(1.5rem, 4.5vw, 1.85rem);
     font-weight: 700;
-    color: var(--color-gold-bright);
-    letter-spacing: 0.15em;
-    margin-top: 0.5rem;
+    color: #8c6024;
+    letter-spacing: 0.2em;
+    margin-top: 0.6rem;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
+    position: relative;
+    display: inline-block;
+}
+
+.footer-logo::before,
+.footer-logo::after {
+    content: "—";
+    color: #bfa05f;
+    margin: 0 0.5rem;
+    font-weight: 300;
 }
 
 /* Mini Calendar Widget */
