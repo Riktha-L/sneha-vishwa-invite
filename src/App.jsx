@@ -55,20 +55,10 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
-  // Initialize Background Audio (Loop starting at 0:05)
+  // Initialize Background Audio (Loop seamlessly)
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
-
-    const setStartTime = () => {
-      try {
-        if (audio.currentTime < 5) {
-          audio.currentTime = 5
-        }
-      } catch {
-        // Deferred until audio metadata is ready
-      }
-    }
 
     const removeInteractionListeners = () => {
       window.removeEventListener('click', handleUserInteraction)
@@ -79,7 +69,6 @@ function App() {
     }
 
     const tryPlay = () => {
-      setStartTime()
       const playPromise = audio.play()
       if (playPromise !== undefined) {
         playPromise
@@ -96,23 +85,6 @@ function App() {
       tryPlay()
     }
 
-    const handleLoadedMetadata = () => {
-      setStartTime()
-    }
-
-    // Seamless loop from 0:05 when track ends
-    const handleEnded = () => {
-      try {
-        audio.currentTime = 5
-      } catch {
-        // Fallback
-      }
-      audio.play().catch(() => {})
-    }
-
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
-    audio.addEventListener('ended', handleEnded)
-
     // Attempt autoplay immediately
     tryPlay()
 
@@ -124,8 +96,6 @@ function App() {
     document.addEventListener('touchstart', handleUserInteraction, { passive: true })
 
     return () => {
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
-      audio.removeEventListener('ended', handleEnded)
       removeInteractionListeners()
     }
   }, [])
@@ -157,6 +127,7 @@ function App() {
         ref={audioRef}
         preload="auto"
         playsInline
+        loop
         src="/music-cut.mp3"
       >
         <source src="/music-cut.mp3" type="audio/mpeg" />
